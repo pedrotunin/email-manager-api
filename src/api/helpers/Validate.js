@@ -30,6 +30,45 @@ class Validate {
 
     }
 
+    async validateEmail(email, errors) {
+
+        var message = '';
+        if (email == undefined) {
+            message = 'No e-mail was given!';
+            errors.push(new Error("name", message));
+            return;
+        }
+        if (email == undefined || !isEmail(email)) {
+            message = 'The given e-mail is invalid!';
+            errors.push(new Error("email", message));
+        }
+
+    }
+    
+    async validatePassword(password, errors) {
+    
+        var error = undefined;
+
+        if (password == undefined)
+            error = new Error("password", "No password was given!")
+
+        if (password != undefined && password.length < 6)
+            error = new Error("password", "Password must be at least 6 characters long.")
+
+        if (error != undefined) 
+            errors.push(error);
+
+    }
+
+    async validateLogin(email, password) {
+        var errors = [];
+
+        this.validateEmail(email, errors);
+        this.validatePassword(password, errors);
+
+        return errors;
+    }
+
 }
 
 module.exports = new Validate();

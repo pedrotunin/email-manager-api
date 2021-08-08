@@ -11,6 +11,7 @@ class EmailQueueController {
     async getAll(req, res, next) {
         const emails = await EmailQueue.getAll();
 
+
         if (emails.length == 0) {
             res.status(404);
             res.json(ApiReturn.error('No emails found.'));

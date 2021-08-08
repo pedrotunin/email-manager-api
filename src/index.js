@@ -15,7 +15,9 @@ app.use(bodyParser.json());
 const Scheduler = require('./scheduler/Scheduler');
 Scheduler.start();
 
-app.use()
+// Setting up middleware to only accept private connections (localhost)
+const OnlyPrivateConnectionsMiddleware = require('./api/middlewares/OnlyPrivateConnectionsMiddleware');
+app.use(OnlyPrivateConnectionsMiddleware);
 
 app.use('/api', router);
 

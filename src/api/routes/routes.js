@@ -3,15 +3,25 @@ const express = require('express');
 const router = express.Router();
 
 const EmailQueueController = require('../controllers/EmailQueueController');
+const UserController = require('../controllers/UserController');
+const SecretController = require('../controllers/SecretController');
 
-router.post('/email', EmailQueueController.create);
+const LoggedMiddleware = require('../middlewares/LoggedMiddleware');
 
-router.get('/email', EmailQueueController.getAll);
-router.get('/email/sent', EmailQueueController.getSent);
-router.get('/email/notSent', EmailQueueController.getNotSent);
-router.get('/email/sentToday', EmailQueueController.getSentToday);
+// SecretController
+    router.post('/secret', SecretController.createSecret);
 
-router.delete('/email/:email_id', EmailQueueController.delete);
-router.put('/email/:email_id', EmailQueueController.setSent);
+// UserController
+    router.post('/user', UserController.create);
+    router.post('/user/login', UserController.login);
+
+// EmailQueueController
+    router.post('/email', LoggedMiddleware, EmailQueueController.create);
+    router.get('/email', LoggedMiddleware, EmailQueueController.getAll);
+    router.get('/email/sent', LoggedMiddleware, EmailQueueController.getSent);
+    router.get('/email/notSent', LoggedMiddleware, EmailQueueController.getNotSent);
+    router.get('/email/sentToday', LoggedMiddleware, EmailQueueController.getSentToday);
+    router.delete('/email/:email_id', LoggedMiddleware, EmailQueueController.delete);
+    router.put('/email/:email_id', LoggedMiddleware, EmailQueueController.setSent);
 
 module.exports = router;
