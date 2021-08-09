@@ -49,7 +49,20 @@ class EmailQueueController {
     }
 
     async getSentToday(req, res, next) {
-        const qtd = await EmailQueue.getSentToday();
+        const emails = await EmailQueue.getSentToday();
+
+        if (emails.length == 0) {
+            res.status(404);
+            res.json(ApiReturn.error('No emails found.'));
+            return;
+        }
+
+        res.status(200);
+        res.json(ApiReturn.success('Success!', emails));
+    }
+
+    async getAmountSentToday(req, res, next) {
+        const qtd = await EmailQueue.getAmountSentToday();
 
         if (qtd == -1) {
             res.status(500);

@@ -20,7 +20,8 @@ const LoggedMiddleware = require('../middlewares/LoggedMiddleware');
     router.get('/email', LoggedMiddleware, EmailQueueController.getAll);
     router.get('/email/sent', LoggedMiddleware, EmailQueueController.getSent);
     router.get('/email/notSent', LoggedMiddleware, EmailQueueController.getNotSent);
-    router.get('/email/amountSentToday', LoggedMiddleware, EmailQueueController.getSentToday);
+    router.get('/email/amountSentToday', LoggedMiddleware, EmailQueueController.getAmountSentToday);
+    router.get('/email/sentToday', LoggedMiddleware, EmailQueueController.getSentToday)
     router.delete('/email/:email_id', LoggedMiddleware, EmailQueueController.delete);
     router.put('/email/:email_id', LoggedMiddleware, EmailQueueController.setSent);
 

@@ -42,6 +42,7 @@ node src/index.js
 - (GET) **/api/email/sent**: retorna todos os e-mails enviados da fila
 - (GET) **/api/email/notSent**: retorna todos os e-mail não enviados da fila
 - (GET) **/api/email/amountSentToday**: retorna a quantidade de e-mails enviados no dia atual
+- (GET) **/api/email/sentToday**: retorna os e-mails enviados no dia atual
 - (DELETE) **/api/email/$id**: deleta o e-mail com id=**$id**
 - (PUT) **/api/email/$id**: altera o status de envio do e-mail com id=**$id** para enviado.
 

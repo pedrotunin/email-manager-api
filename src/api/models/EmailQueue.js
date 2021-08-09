@@ -82,6 +82,18 @@ class EmailQueue {
 
     async getSentToday() {
         try {
+            const query = `SELECT * FROM ${EMAIL_QUEUE_TABLE} WHERE sent=true AND sent_at >= CURRENT_DATE;`;
+            const emails = await connection.raw(query);
+
+            return emails.rows;
+        } catch (error) {
+            console.log(error)
+            return undefined
+        }
+    }
+
+    async getAmountSentToday() {
+        try {
 
             const query = `SELECT COUNT(*) AS QTD FROM ${EMAIL_QUEUE_TABLE} WHERE sent=true AND sent_at >= CURRENT_DATE;`;
             const emails = await connection.raw(query);
