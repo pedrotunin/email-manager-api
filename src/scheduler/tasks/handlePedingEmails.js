@@ -10,7 +10,7 @@ module.exports = async function(pendingEmails) {
         try {
         
             email = pendingEmails[i];
-            const qtdSentToday = await EmailQueue.getSentToday();
+            const qtdSentToday = await EmailQueue.getAmountSentToday();
             if (qtdSentToday != -1 && qtdSentToday < process.env.QTD_MAX_PER_DAY) {
                 sendEmail(email);
                 EmailQueue.setSent(email.email_id);
